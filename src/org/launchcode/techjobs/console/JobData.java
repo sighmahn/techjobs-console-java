@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -20,6 +21,23 @@ public class JobData {
     private static Boolean isDataLoaded = false;
 
     private static ArrayList<HashMap<String, String>> allJobs;
+    public static void findByValue(String field) {
+        loadData();
+        //ArrayList<String>
+        for(HashMap<String, String> job : allJobs) {
+
+           //System.out.println(job.getKey() + ": " + job.getValue());
+            for (Map.Entry<String, String> entry : job.entrySet()) {
+                if (field.equals(entry.getValue().toLowerCase())) {
+                    System.out.println("*****");
+                    for (Map.Entry<String, String> foundEntry : job.entrySet()) {
+                            System.out.println(foundEntry.getKey() + ": " + foundEntry.getValue());
+                    }
+                }
+            }
+        }
+       // return new ArrayList<String>();
+    }
 
     /**
      * Fetch list of all values from loaded data,
@@ -62,7 +80,7 @@ public class JobData {
      * with "Enterprise Holdings, Inc".
      *
      * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
+     * @param value Value of the field to search for
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
